@@ -12,10 +12,10 @@ export const Controls = ({ started, onToggle, onClear }: Props) => {
   return (
     <div className={classes.controls}>
       <Button onActivate={onToggle} shortcut=" ">
-        {started ? "Stop" : "Play"}
+        {started ? "Stop " : "Start"}
       </Button>
       <Button onActivate={onClear} shortcut="Backspace">
-        Clear
+        Reset
       </Button>
     </div>
   );

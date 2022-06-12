@@ -14,7 +14,7 @@ type Action =
   | { type: "tick" }
   | { type: "increment"; amount: number }
   | { type: "decrement"; amount: number }
-  | { type: "clear" }
+  | { type: "reset" }
   | { type: "play" }
   | { type: "stop" }
   | { type: "toggle" }
@@ -27,7 +27,7 @@ const initialState = {
   colorScheme: "auto",
 };
 
-const availableColorSchemes = ["auto", "light", "dark"];
+const availableColorSchemes = ["auto", "light", "dark", "custom"];
 
 const reducer = (state: State, action: Action): State => {
   const now = Date.now();
@@ -66,11 +66,11 @@ const reducer = (state: State, action: Action): State => {
           state.elapsed -
           (state.elapsed > action.amount ? action.amount : state.elapsed),
       };
-    case "clear":
+    case "reset":
       return {
         ...state,
         elapsed: 0,
-        started: state.started && now,
+        started: false,
       };
     case "play":
       return {

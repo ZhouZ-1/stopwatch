@@ -22,12 +22,12 @@ export const Stopwatch = () => {
 
   useEffect(() => {
     if (!id) {
-      const { pathname } = window.location;
+      const { pathname, search } = window.location;
       const id = pathname === "/" ? nanoid(5) : pathname.substring(1);
 
       dispatch({ type: "load", id });
 
-      window.history.replaceState({}, "", "/" + id);
+      window.history.replaceState({}, "", "/" + id + search);
     }
   }, [dispatch, id]);
 
@@ -36,8 +36,19 @@ export const Stopwatch = () => {
   });
 
   useEffect(() => {
-    document.documentElement.setAttribute("data-color-scheme", colorScheme);
-    notification.setMessage(`Color scheme: ${colorScheme}`);
+    const { search } = window.location;
+    if (!search) {
+      document.documentElement.setAttribute("data-color-scheme", colorScheme);
+      notification.setMessage(`Color scheme: ${colorScheme}`);
+    } else {
+      const params = new URLSearchParams(search);
+      document.documentElement.style.setProperty("color", params.get("color"));
+      document.documentElement.style.setProperty(
+        "background-color",
+        params.get("background-color")
+      );
+      notification.setMessage(`Color scheme: custom`);
+    }
   }, [colorScheme, notification]);
 
   useKey("l", () => {
@@ -60,7 +71,7 @@ export const Stopwatch = () => {
         <Display started={started} elapsed={elapsed} />
         <Controls
           onToggle={() => dispatch({ type: "toggle" })}
-          onClear={() => dispatch({ type: "clear" })}
+          onClear={() => dispatch({ type: "reset" })}
           started={started}
         />
       </div>
