@@ -4,7 +4,8 @@
   font-weight: lighter;
   inset: 0 0 auto auto;
   padding: 0.75em;
-  position: fixed;
+  position: absolute;
+  left: 0;
   text-transform: capitalize;
 }
 
