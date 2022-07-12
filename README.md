@@ -4,7 +4,7 @@ All credits go to [Haggen](https://github.com/haggen/stopwatch) for the original
 This fork introduces a few qol improvements and personal changes:
 
 - Adjust text and functionality to more closely match the google stopwatch widget.
-- Change the background and foreground colors using the url by adding a `background-color` and `color` parameter.
+- Change the background and foreground colors using the url by adding a `background-color` and `color` parameter. [Example](https://stopwatch.zzhou.dev/?background-color=%23191919)
 - Notification is shown on the left side of the screen instead of the right side.
 
 ![A screenshot of Stopwatch embedded in Notion.so](screenshot.webp)
